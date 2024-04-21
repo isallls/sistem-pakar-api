@@ -10,3 +10,4 @@ Route::get('/user', function (Request $request) {
 Route::apiResource('/pakar', sistemPakar::class);
 Route::get('/penyakit/{id}', [sistemPakar::class, 'show']);
 Route::get('/penyakit', [sistemPakar::class, 'diseas']);
+Route::post('/test', [sistemPakar::class, 'test']);
