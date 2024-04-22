@@ -4,5 +4,5 @@
 {{ $item->id }}
 
 {{ $item->indication }}
-    
 @endforeach
+{{ $a }}

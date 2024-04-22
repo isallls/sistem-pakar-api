@@ -57,27 +57,57 @@ class sistemPakar extends Controller
     public function test(Request $request)
     {
         $jsonData = $request->input();
-        $data = [];
+        $dac = [];
 
-        // Periksa apakah $jsonData adalah array dan memiliki kunci 'data_diseases_id'
-        if (is_array($jsonData) && isset($jsonData["data_diseases_id"])) {
-            $data_diseases_id = $jsonData["data_diseases_id"];
-
-            // Periksa apakah $data_diseases_id adalah array
-            if (is_array($data_diseases_id) && !empty($data_diseases_id)) {
-                foreach ($data_diseases_id as $d) {
-                    // Misalkan $d adalah teks gejala, simpan ke dalam array $data
-                    $data[] = ['gejala' => $d];
+        $data = [
+            "gejala" => [],
+        ];
+        $ginjalAkut = array(1, 2, 3, 4, 5, 6);
+        $ginjalKronis = array(7, 8, 9, 10, 11, 12);
+        $batuGinjal = array(13, 14, 15, 16, 17);
+        $infeksiGinjal = array(18, 19);
+        $kankerGinjal = array(20, 21, 22);
+        $gagalGinjal = array(23, 24, 25, 26, 27);
+        $nilai = 0;
+        if (isset($jsonData['data_diseases_id']) || !empty($jsonData)) {
+            $post = $jsonData['data_diseases_id'];
+            for ($i = 0; $i < count($post); $i++) {
+                if ($post[$i] > count(indication::all())) {
+                    unset($post[$i]);
                 }
-            } else {
-                // Handle jika $data_diseases_id kosong atau bukan array
-                $data['data_diseases_id'] = null; // Atau lakukan penanganan kesalahan lainnya
             }
-        } else {
-            // Handle jika $jsonData kosong atau tidak memiliki kunci 'data_diseases_id'
-            $data['data_diseases_id'] = null; // Atau lakukan penanganan kesalahan lainnya
+            foreach ($post as $d) {
+                $dac[] = [
+                    'gejala_id' => $d,
+                    'gejala' => indication::find($d)->indication
+                ];
+            }
         }
-        // $jsonData = $jsonData['data_diseases_id'];
-        return new pakarResource(true, 'info penyakut', dd($data));
+        function check($rule, $data)
+        {
+            $nilai = 0;
+            foreach ($data as $p) {
+                if (in_array($p, $rule)) {
+                    $nilai += 1;
+                } else {
+                    $nilai += 0;
+                }
+            }
+            $result = number_format($nilai / count($rule) * 100, 1);
+            return $result;
+
+            // return dd($nilai);
+        }
+        $data['result'] = [
+            'ginjal akut' => check($ginjalAkut, $post),
+            'ginjal kronis' => check($ginjalKronis, $post),
+            'batu ginjal' => check($batuGinjal, $post),
+            'infeksi ginjal' => check($infeksiGinjal, $post),
+            'kanker ginjal' => check($kankerGinjal, $post),
+            'gagal ginjal' => check($gagalGinjal, $post)
+
+        ];
+        $data['gejala'] = $dac;
+        return new pakarResource(true, 'info penyakit', $data);
     }
 }
