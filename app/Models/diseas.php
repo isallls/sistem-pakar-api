@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class diseas extends Model
 {
@@ -12,4 +13,14 @@ class diseas extends Model
         'diseas_id', 
         'diseas'
     ];
+
+    /**
+     * Get all of the comments for the diseas
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rules(): HasMany
+    {
+        return $this->hasMany(rules::class, 'diseas_id', 'id');
+    }
 }

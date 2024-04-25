@@ -98,6 +98,16 @@ class sistemPakar extends Controller
 
             // return dd($nilai);
         }
+        // if(empty ($post)){
+        //     $data['result'] = [
+        //         null
+        //     ];
+        // }
+        $diseas = diseas::all();
+        $x= count($diseas);
+        foreach ($diseas as $d){
+
+        }
         $data['result'] = [
             'ginjal akut' => check($ginjalAkut, $post),
             'ginjal kronis' => check($ginjalKronis, $post),
@@ -105,9 +115,9 @@ class sistemPakar extends Controller
             'infeksi ginjal' => check($infeksiGinjal, $post),
             'kanker ginjal' => check($kankerGinjal, $post),
             'gagal ginjal' => check($gagalGinjal, $post)
-
         ];
         $data['gejala'] = $dac;
+        // return new pakarResource(true, 'info penyakit', $x);
         return new pakarResource(true, 'info penyakit', $data);
     }
 }

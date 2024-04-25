@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\diseas;
 use App\Models\indication;
-use App\Models\relasi;
+use App\Models\rules;
 use App\Models\relation;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         ]);
         indication::create([
             'indication_id' => 3,
-            'indication' => 'Demam',
+            'indication' => 'Demam yang tidak membaik dan berlangsung lama tanpa alasan yang jelas',
         ]);
         indication::create([
             'indication_id' => 4,
@@ -46,11 +46,12 @@ class DatabaseSeeder extends Seeder
         ]);
         indication::create([
             'indication_id' => 7,
-            'indication' => 'Hilang nafsu makan',
+            'indication' => 'Penurunan berat badan yang tidak diinginkan dan tanpa penyebab yang jelas, atau kehilangan nafsu makan yang berkelanjutan, dapat menjadi gejala kanker.',
         ]);
         indication::create([
             'indication_id' => 8,
-            'indication' => 'Lelah dan lemah',
+            // 'indication' => 'Lelah dan lemah',
+            'indication' => 'Kelelahan yang tidak membaik meskipun sudah istirahat cukup bisa menjadi gejala kanker.',
         ]);
         indication::create([
             'indication_id' => 9,
@@ -74,7 +75,7 @@ class DatabaseSeeder extends Seeder
         ]);
         indication::create([
             'indication_id' => 14,
-            'indication' => 'Urin berwarna pink, merah atau coklat',
+            'indication' => 'Perubahan pada pola buang air besar atau buang air kecil, seperti diare atau konstipasi yang berkepanjangan, atau darah dalam tinja atau urin',
         ]);
         indication::create([
             'indication_id' => 15,
@@ -102,7 +103,7 @@ class DatabaseSeeder extends Seeder
         ]);
         indication::create([
             'indication_id' => 21,
-            'indication' => 'Rasa nyeri pada sisi yang tidak hilang',
+            'indication' => 'Nyeri yang tidak hilang atau memburuk seiring waktu',
         ]);
         indication::create([
             'indication_id' => 22,
@@ -141,7 +142,7 @@ class DatabaseSeeder extends Seeder
             'diseas' => 'Batu Ginjal',
         ]);
         diseas::create([
-            'diseas_id' => 4,
+        'diseas_id' => 4,
             'diseas' => 'Infeksi Ginjal',
         ]);
         diseas::create([
@@ -152,138 +153,138 @@ class DatabaseSeeder extends Seeder
             'diseas_id' => 6,
             'diseas' => 'Gagal Ginjal',
         ]);
-        relation::create([
-            'relation_id' => 1,
+        rules::create([
+            'rules_id' => 1,
             'indication_id' => '1',
             'diseas_id' => '1',
         ]);
-        relation::create([
-            'relation_id' => 2,
+        rules::create([
+            'rules_id' => 2,
             'indication_id' => '2',
             'diseas_id' => '1',
         ]);
-        relation::create([
-            'relation_id' => 3,
+        rules::create([
+            'rules_id' => 3,
             'indication_id' => '3',
             'diseas_id' => '1',
         ]);
-        relation::create([
-            'relation_id' => 4,
+        rules::create([
+            'rules_id' => 4,
             'indication_id' => '4',
             'diseas_id' => '1',
         ]);
-        relation::create([
-            'relation_id' => 5,
+        rules::create([
+            'rules_id' => 5,
             'indication_id' => '5',
             'diseas_id' => '1',
         ]);
-        relation::create([
-            'relation_id' => 6,
+        rules::create([
+            'rules_id' => 6,
             'indication_id' => '6',
             'diseas_id' => '1',
         ]);
-        relation::create([
-            'relation_id' => 7,
+        rules::create([
+            'rules_id' => 7,
             'indication_id' => '7',
             'diseas_id' => '2',
         ]);
-        relation::create([
-            'relation_id' => 8,
+        rules::create([
+            'rules_id' => 8,
             'indication_id' => '8',
             'diseas_id' => '2',
         ]);
-        relation::create([
-            'relation_id' => 9,
+        rules::create([
+            'rules_id' => 9,
             'indication_id' => '9',
             'diseas_id' => '2',
         ]);
-        relation::create([
-            'relation_id' => 10,
+        rules::create([
+            'rules_id' => 10,
             'indication_id' => '10',
             'diseas_id' => '2',
         ]);
-        relation::create([
-            'relation_id' => 11,
+        rules::create([
+            'rules_id' => 11,
             'indication_id' => '11',
             'diseas_id' => '2',
         ]);
-        relation::create([
-            'relation_id' => 12,
+        rules::create([
+            'rules_id' => 12,
             'indication_id' => '12',
             'diseas_id' => '2',
         ]);
-        relation::create([
-            'relation_id' => 13,
+        rules::create([
+            'rules_id' => 13,
             'indication_id' => '13',
             'diseas_id' => '3',
         ]);
-        relation::create([
-            'relation_id' => 14,
+        rules::create([
+            'rules_id' => 14,
             'indication_id' => '14',
             'diseas_id' => '3',
         ]);
-        relation::create([
-            'relation_id' => 15,
+        rules::create([
+            'rules_id' => 15,
             'indication_id' => '15',
             'diseas_id' => '3',
         ]);
-        relation::create([
-            'relation_id' => 16,
+        rules::create([
+            'rules_id' => 16,
             'indication_id' => '16',
             'diseas_id' => '3',
         ]);
-        relation::create([
-            'relation_id' => 17,
+        rules::create([
+            'rules_id' => 17,
             'indication_id' => '17',
             'diseas_id' => '3',
         ]);
-        relation::create([
-            'relation_id' => 18,
+        rules::create([
+            'rules_id' => 18,
             'indication_id' => '18',
             'diseas_id' => '4',
         ]);
-        relation::create([
-            'relation_id' => 19,
+        rules::create([
+            'rules_id' => 19,
             'indication_id' => '19',
             'diseas_id' => '4',
         ]);
-        relation::create([
-            'relation_id' => 20,
+        rules::create([
+            'rules_id' => 20,
             'indication_id' => '20',
             'diseas_id' => '5',
         ]);
-        relation::create([
-            'relation_id' => 21,
+        rules::create([
+            'rules_id' => 21,
             'indication_id' => '21',
             'diseas_id' => '5',
         ]);
-        relation::create([
-            'relation_id' => 22,
+        rules::create([
+            'rules_id' => 22,
             'indication_id' => '22',
             'diseas_id' => '5',
         ]);
-        relation::create([
-            'relation_id' => 23,
+        rules::create([
+            'rules_id' => 23,
             'indication_id' => '23',
             'diseas_id' => '6',
         ]);
-        relation::create([
-            'relation_id' => 24,
+        rules::create([
+            'rules_id' => 24,
             'indication_id' => '24',
             'diseas_id' => '6',
         ]);
-        relation::create([
-            'relation_id' => 25,
+        rules::create([
+            'rules_id' => 25,
             'indication_id' => '25',
             'diseas_id' => '6',
         ]);
-        relation::create([
-            'relation_id' => 26,
+        rules::create([
+            'rules_id' => 26,
             'indication_id' => '26',
             'diseas_id' => '6',
         ]);
-        relation::create([
-            'relation_id' => 27,
+        rules::create([
+            'rules_id' => 27,
             'indication_id' => '27',
             'diseas_id' => '6',
         ]);

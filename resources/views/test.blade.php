@@ -1,8 +1,17 @@
 {{-- {{ $test }} --}}
 @foreach ($test as $item)
 <br>
-{{ $item->id }}
+{{-- {{ $item->id }}
 
-{{ $item->indication }}
+{{ $item->indication }} --}}
+
 @endforeach
-{{ $a }}
+{{-- @dd($a->relations) --}}
+@foreach ($test as $c)
+<br>
+{{ $c->diseas }} || {{ $c->rules->pluck('id') }}
+@endforeach
+@foreach ($tet as $s)
+{{ $s->rules_id }}
+    
+@endforeach
