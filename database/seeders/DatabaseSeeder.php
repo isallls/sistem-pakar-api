@@ -288,5 +288,10 @@ class DatabaseSeeder extends Seeder
             'indication_id' => '27',
             'diseas_id' => '6',
         ]);
+        rules::create([
+            'rules_id' => 27,
+            'indication_id' => '2',
+            'diseas_id' => '6',
+        ]);
     }
 }

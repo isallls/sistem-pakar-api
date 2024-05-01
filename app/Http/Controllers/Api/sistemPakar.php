@@ -7,6 +7,7 @@ use App\Http\Resources\pakarResource;
 use App\Models\diseas;
 use App\Models\indication;
 use Illuminate\Http\Request;
+use League\MimeTypeDetection\EmptyExtensionToMimeTypeMap;
 
 class sistemPakar extends Controller
 {
@@ -14,10 +15,10 @@ class sistemPakar extends Controller
     public function index()
     {
         $data = indication::all();
-        foreach ($data as $d) {
+        foreach ($data as $i) {
             $gejala[] = [
-                'indication_id' => $d->indication_id,
-                'indication' => $d->indication,
+                'indication_id' => $i->indication_id,
+                'indication' => $i->indication,
             ];
         }
         $diseas = [
@@ -29,7 +30,8 @@ class sistemPakar extends Controller
     {
         $disease = diseas::find($id);
         $s = [
-            'disease' => $disease->dieas,
+            'disease' => $disease,
+            'rules' => $disease->rules
         ];
         return new pakarResource(true, 'penyakit', $s);
     }
@@ -53,43 +55,34 @@ class sistemPakar extends Controller
     public function test(Request $request)
     {
         $jsonData = $request->input();
-        // $dac = [];
         $data = [
             'gejala' => [],
         ];
-        // $ginjalAkut = array(1, 2, 3, 4, 5, 6);
-        // $ginjalKronis = array(7, 8, 9, 10, 11, 12);
-        // $batuGinjal = array(13, 14, 15, 16, 17);
-        // $infeksiGinjal = array(18, 19);
-        // $kankerGinjal = array(20, 21, 22);
-        // $gagalGinjal = array(23, 24, 25, 26, 27);
-        // $nilai = 0;
+
         if (isset($jsonData['data_diseases_id']) || !empty($jsonData)) {
             $post = $jsonData['data_diseases_id'];
+            $post = collect($post)->unique();
             for ($i = 0; $i < count($post); $i++) {
-                // $none = ($post[$i] > count(indication::all()) || $post[$i]==0) ?($post[$i]) : false;
-                if ($post[$i] > count(indication::all()) || $post[$i] == 0) {
-                    unset($post[$i]);
-                }
-            }
-            if (empty($post)) {
-                $indication = [];
+                $none = $post[$i] > count(indication::all()) || $post[$i] == 0 ? $post[$i] : false;
+                unset($none);
             }
             foreach ($post as $d) {
                 $indication[] = [
                     'indication_id' => $d,
-                    'indication' => indication::find($d)->indication,
+                    // 'indication' => indication::find($d)->indication,
+                    'indication' =>  indication::where('indication_id',$d)->first()->indication,
                 ];
+            }
+            if (empty($post)) {
+                $indication = [];
             }
         }
         function check($rule = [], $data)
         {
             $nilai = 0;
-            if ($rule == null) {
-                $rule = [0];
-            }
+            $rule == null ? ($rule = [0]) : false;
             foreach ($data as $p) {
-                in_array($p, $rule) ? $nilai++ : ($nilai += 0);
+                in_array($p, $rule) ? $nilai++ : $nilai += 0;
             }
             $result = number_format(($nilai / count($rule)) * 100, 1);
             return $result;
@@ -97,14 +90,16 @@ class sistemPakar extends Controller
         $diseas = diseas::all();
         foreach ($diseas as $d) {
             $resultD = $d->rules->pluck('indication_id')->toArray();
-            $x[] = [
+            $results[] = [
                 'diseas' => $d->diseas,
                 'result' => check($resultD, $post),
+                'diseas_id' => $d->id
             ];
         }
-        $data['result'] = $x;
-        $data['gejala'] = $indication;
-        // return new pakarResource(true, 'info penyakit', $x);
-        return new pakarResource(true, 'info penyakit', $data);
+        $data['result'] = $results;
+        $data['gejala'] = isset($indication) ? $indication : [];
+
+        return new pakarResource(true, 'info penyakit',$data);
+        // return new pakarResource(true, 'info penyakit', $data);
     }
 }

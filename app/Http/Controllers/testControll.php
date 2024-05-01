@@ -6,6 +6,7 @@ use App\Models\diseas;
 use App\Models\indication;
 use App\Models\rules;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Testing\Constraints\CountInDatabase;
 
 use function Laravel\Prompts\alert;
@@ -13,18 +14,17 @@ use function Laravel\Prompts\alert;
 class testControll extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
         return view('test', [
-            'test' => indication::all(),
-            'cont' => 'controllers',
-            'a' => diseas::find(1),
-            'test' => diseas::all(),
-            'tet' => rules::all(),
-            'r' => diseas::find(7),
-            'q' => diseas::find(1),
-            'asd' => gettype(diseas::find(7)->rules->pluck('indicaion_id')),
-            'awa' => rules::find(28)
+            'a' => rules::find(1),
+            'as' => diseas::find(1),
         ]);
+    }
+    public function create()
+    {
+        // return indication::create([
+        //     'indication' => 'perut keconcongan',
+        // ]);
     }
 }

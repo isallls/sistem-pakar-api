@@ -9,3 +9,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/',[testControll::class,'index']);
+Route::get('/create',[testControll::class,'create']);

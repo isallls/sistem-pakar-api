@@ -12,7 +12,7 @@ class indication extends Model
         'indication_id',
         'indication'
     ];
-    public function indication(){
-        return $this->hasOne(indication::class, 'id', 'indication_id');
+    public function rules(){
+    return $this->hasMany(rules::class,'indication_id','indication_id');
     }
 }
